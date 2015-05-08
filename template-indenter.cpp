@@ -11,14 +11,6 @@ ostream& print_indent(ostream& os, int level, const string& seq)
 	return os;
 }
 
-int skip_spaces(istream& is)
-{
-	auto c = is.get();
-	for (; c == ' '; c = is.get());
-	is.unget();
-	return c;
-}
-
 /* t_indent: indent template. */
 ostream& t_indent(istream& is, ostream& os, int level, const string& indent)
 {
@@ -29,8 +21,6 @@ ostream& t_indent(istream& is, ostream& os, int level, const string& indent)
 		case '<':
 			os << '<' << std::endl;
 			t_indent(is, os, level + 1, indent);
-			// if (skip_spaces(is) != '>')
-			//         print_indent(os, level, indent);
 			break;
 		case '>':
 			os << '>';
