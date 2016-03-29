@@ -94,9 +94,23 @@ ostream& t_indent_all(istream& is, ostream& os, string indent)
 	return os;
 }
 
-int main()
+ostream& usage(ostream& os)
+{
+	return os
+	<< "template-indenter: reads from stdin; outputs to stdout; takes no arguments.\n"
+	<< "Example usage:\n"
+	<< "    g++ [...] |& template-indenter\n"
+	<< "    clang++ -fcolor-diagnostics [...] |& template-indenter\n";
+}
+
+int main(int argc, char**)
 {
 	using namespace std;
+
+	if (argc > 1) {
+		usage(cerr);
+		return 1;
+	}
 
 	t_indent_all(cin, cout, "    ");
 	if (cin.bad() || cout.bad()) {
